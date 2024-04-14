@@ -1,9 +1,9 @@
 package com.martijn.CompCheckV2.rest;
 
 import com.martijn.CompCheckV2.presistence.entity.User;
+import com.martijn.CompCheckV2.rest.dto.requests.UserRequest;
 import com.martijn.CompCheckV2.rest.mapper.UserMapper;
-import com.martijn.CompCheckV2.rest.requests.UserRequest;
-import com.martijn.CompCheckV2.rest.response.UserResponse;
+import com.martijn.CompCheckV2.rest.dto.response.UserResponse;
 import com.martijn.CompCheckV2.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ public class UserController {
 
     @PostMapping("/register")
     public UserResponse registerUser(@RequestBody @Valid UserRequest userRequest){
-        User newUser = userService.registerUser(UserMapper.requestToUser(userRequest));
-        return UserMapper.userToResponse(newUser);
+        User newUser = userService.registerUser(UserMapper.requestToDto(userRequest));
+        return UserMapper.userDtoToResponse(newUser);
     }
 
 }

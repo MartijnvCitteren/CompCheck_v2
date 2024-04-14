@@ -1,4 +1,4 @@
-package com.martijn.CompCheckV2.rest.requests;
+package com.martijn.CompCheckV2.rest.dto.requests;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;

@@ -1,13 +1,14 @@
-package com.martijn.CompCheckV2.rest.response;
+package com.martijn.CompCheckV2.rest.dto;
 
 import lombok.Builder;
 
 @Builder
-public record UserResponse(
+public record UserDto(
         String firstName,
         String lastName,
         String city,
         String country,
-        String email
+        String email,
+        String password
 ) {
 }

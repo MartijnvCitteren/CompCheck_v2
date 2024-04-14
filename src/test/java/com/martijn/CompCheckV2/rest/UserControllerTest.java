@@ -16,8 +16,5 @@ class UserControllerTest {
     @MockBean
     UserService userService;
 
-
-    @Test
-    void registerUser() {
-    }
+    //TODO:
 }
