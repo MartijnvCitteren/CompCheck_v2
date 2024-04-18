@@ -10,14 +10,19 @@ import lombok.Builder;
 public record UserRequest(
         @NotBlank
         String firstName,
+
         @NotBlank
         String lastName,
+
         @NotBlank
         String city,
+
         @NotBlank
         String country,
-        @Email
+
+        @Email(message = "please enter a valid email")
         String email,
+
         @NotBlank
         String password
 ) {

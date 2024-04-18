@@ -38,4 +38,15 @@ public class UserMapper {
                 .password(dto.password())
                 .build();
     }
+
+    public static UserDto userToUserDto(User user){
+        return UserDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .city(user.getCity())
+                .country(user.getCountry())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .build();
+    }
 }

@@ -1,6 +1,7 @@
 package com.martijn.CompCheckV2.rest;
 
 import com.martijn.CompCheckV2.presistence.entity.User;
+import com.martijn.CompCheckV2.rest.dto.UserDto;
 import com.martijn.CompCheckV2.rest.dto.requests.UserRequest;
 import com.martijn.CompCheckV2.rest.mapper.UserMapper;
 import com.martijn.CompCheckV2.rest.dto.response.UserResponse;
@@ -20,7 +21,7 @@ public class UserController {
 
     @PostMapping("/register")
     public UserResponse registerUser(@RequestBody @Valid UserRequest userRequest){
-        User newUser = userService.registerUser(UserMapper.requestToDto(userRequest));
+        UserDto newUser = userService.registerUser(UserMapper.requestToDto(userRequest));
         return UserMapper.userDtoToResponse(newUser);
     }
 
