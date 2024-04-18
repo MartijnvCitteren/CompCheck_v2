@@ -5,7 +5,6 @@ import com.martijn.CompCheckV2.presistence.entity.UserFactory;
 import com.martijn.CompCheckV2.presistence.repository.UserRepository;
 import com.martijn.CompCheckV2.rest.dto.UserDto;
 import com.martijn.CompCheckV2.rest.dto.UserDtoFactory;
-import com.martijn.CompCheckV2.rest.mapper.UserMapper;
 import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,9 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
