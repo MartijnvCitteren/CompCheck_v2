@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public UserResponse registerUser(@RequestBody @Valid UserRequest userRequest){
+    public UserResponse registerUser(@Valid @RequestBody UserRequest userRequest){
         UserDto newUser = userService.registerUser(UserMapper.requestToDto(userRequest));
         return UserMapper.userDtoToResponse(newUser);
     }
