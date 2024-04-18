@@ -2,12 +2,12 @@ package com.martijn.CompCheckV2.rest.mapper;
 
 import com.martijn.CompCheckV2.presistence.entity.User;
 import com.martijn.CompCheckV2.rest.dto.UserDto;
-import com.martijn.CompCheckV2.rest.dto.requests.UserRequest;
-import com.martijn.CompCheckV2.rest.dto.response.UserResponse;
+import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
+import com.martijn.CompCheckV2.rest.dto.response.UserRegisterResponse;
 
 public class UserMapper {
 
-    public static UserDto requestToDto(UserRequest request) {
+    public static UserDto requestToDto(UserRegisterRequest request) {
         return UserDto.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastName())
@@ -18,8 +18,8 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserResponse userDtoToResponse(UserDto user){
-        return UserResponse.builder()
+    public static UserRegisterResponse userDtoToResponse(UserDto user){
+        return UserRegisterResponse.builder()
                 .firstName(user.firstName())
                 .lastName(user.lastName())
                 .city(user.city())

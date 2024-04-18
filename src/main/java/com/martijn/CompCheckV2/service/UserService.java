@@ -15,7 +15,7 @@ public class UserService {
 
     public UserDto registerUser(UserDto userDto){
         if(userRepository.existsByEmail(userDto.email())) {
-            throw new EntityExistsException("This e-mail already exists");
+            throw new EntityExistsException("This e-mail address already exists");
         }
         User newUser = UserMapper.dtoToUser(userDto);
         newUser = userRepository.save(newUser);

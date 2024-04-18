@@ -3,7 +3,7 @@ package com.martijn.CompCheckV2.rest.dto.response;
 import lombok.Builder;
 
 @Builder
-public record UserResponse(
+public record UserRegisterResponse(
         String firstName,
         String lastName,
         String city,
