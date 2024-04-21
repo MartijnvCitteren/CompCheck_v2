@@ -1,13 +1,11 @@
-package com.martijn.CompCheckV2.rest.requests;
+package com.martijn.CompCheckV2.rest.dto.requests;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
 @Builder
-@Valid
-public record UserRequest(
+public record UserRegisterRequest(
         @NotBlank
         String firstName,
         @NotBlank
