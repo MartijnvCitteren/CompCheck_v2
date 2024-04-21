@@ -6,6 +6,7 @@ import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
 import com.martijn.CompCheckV2.rest.dto.response.UserRegisterResponse;
 
 public class UserMapper {
+    private UserMapper() {}
 
     public static UserDto requestToDto(UserRegisterRequest request) {
         return UserDto.builder()

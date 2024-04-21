@@ -23,7 +23,6 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<UserRegisterResponse> registerUser(@Valid @RequestBody UserRegisterRequest userRegisterRequest){
         UserDto newUser = userService.registerUser(UserMapper.requestToDto(userRegisterRequest));
-        return new ResponseEntity<UserRegisterResponse>((UserMapper.userDtoToResponse(newUser)), HttpStatus.CREATED);
+        return new ResponseEntity<>((UserMapper.userDtoToResponse(newUser)), HttpStatus.CREATED);
     }
-
 }
