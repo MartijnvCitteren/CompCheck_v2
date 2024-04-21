@@ -73,4 +73,31 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.country").value(expectedResponse.country()));
     }
 
+    @Test
+    void givenFirstNameIsBlankInRequest_whenRegisteringNewUser_thenShouldReturnStatus400() throws Exception {
+        //given
+        registerRequest = UserRegistrationRequestFactory.userRegisterRequest().firstName("").build();
+
+        //when & then
+        mockMvc.perform(post(registerUri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonWriter.writeValueAsString(registerRequest)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.firstName").value("must not be blank"));
+    }
+
+    @Test
+    void givenEmailFormatIsWrongInRequest_whenRegisteringNewUser_thenShouldReturnStatus400() throws Exception {
+        //given
+        registerRequest = UserRegistrationRequestFactory.userRegisterRequest().email("wronggmail.com").build();
+
+        //when & then
+        mockMvc.perform(post(registerUri)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonWriter.writeValueAsString(registerRequest)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.email").value("must be a well-formed email address"));
+    }
 }
