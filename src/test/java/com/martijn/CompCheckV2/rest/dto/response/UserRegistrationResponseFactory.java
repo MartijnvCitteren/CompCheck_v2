@@ -1,7 +1,5 @@
 package com.martijn.CompCheckV2.rest.dto.response;
 
-import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
-
 public class UserRegistrationResponseFactory {
     public static UserRegisterResponse.UserRegisterResponseBuilder userRegisterResponse() {
         return new UserRegisterResponse.UserRegisterResponseBuilder()

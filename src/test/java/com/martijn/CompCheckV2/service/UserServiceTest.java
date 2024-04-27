@@ -32,8 +32,8 @@ class UserServiceTest {
         //given
         UserDto registrantDto = UserDtoFactory.createUserDto().build();
         User thisUser = UserFactory.createUser()
-               .id(1L)
-               .build();
+                .id(1L)
+                .build();
         UserDto expectedUserDto = UserDtoFactory.createUserDto()
                 .id(1L)
                 .build();
@@ -60,7 +60,7 @@ class UserServiceTest {
         when(userRepository.existsByEmail(registrant.email())).thenReturn(true);
 
         //then
-        assertThrows(EntityExistsException.class,() -> userService.registerUser(registrant));
+        assertThrows(EntityExistsException.class, () -> userService.registerUser(registrant));
     }
 
 }
