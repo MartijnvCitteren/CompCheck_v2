@@ -1,15 +1,10 @@
 package com.martijn.CompCheckV2.security.jwt;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SecureDigestAlgorithm;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
@@ -28,7 +23,7 @@ public class JwtServiceImpl implements jwtService {
                 .compact();
     }
 
-    private Key createSecretKey(){
+    private Key createSecretKey() {
         byte[] keyBytes = Decoders.BASE64.decode("normally_this_secret_key_will_be_hidden_somewhere_else_but_for_for_now_this_is_okay");
         return Keys.hmacShaKeyFor(keyBytes);
     }
