@@ -6,7 +6,8 @@ import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
 import com.martijn.CompCheckV2.rest.dto.response.UserRegisterResponse;
 
 public class UserMapper {
-    private UserMapper() {}
+    private UserMapper() {
+    }
 
     public static UserDto requestToDto(UserRegisterRequest request) {
         return UserDto.builder()
@@ -20,7 +21,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserRegisterResponse userDtoToResponse(UserDto user){
+    public static UserRegisterResponse userDtoToResponse(UserDto user) {
         return UserRegisterResponse.builder()
                 .firstName(user.firstName())
                 .lastName(user.lastName())
@@ -30,7 +31,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static User dtoToUser(UserDto dto){
+    public static User dtoToUser(UserDto dto) {
         return User.builder()
                 .firstName(dto.firstName())
                 .lastName(dto.lastName())
@@ -42,7 +43,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserDto userToUserDto(User user){
+    public static UserDto userToUserDto(User user) {
         return UserDto.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

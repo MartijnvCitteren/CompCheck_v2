@@ -19,10 +19,9 @@ public class UserDetailsModel implements UserDetails {
     public UserDetailsModel(UserDto user) {
         this.email = user.email();
         this.password = user.password();
-        if(user.role() == null){
+        if (user.role() == null) {
             this.authorities.add(new SimpleGrantedAuthority(UserRoles.ROLE_USER.name()));
-        }
-        else {
+        } else {
             this.authorities.add(new SimpleGrantedAuthority(user.role().name()));
         }
     }
