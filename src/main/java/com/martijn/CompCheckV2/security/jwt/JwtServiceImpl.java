@@ -15,11 +15,10 @@ import java.util.Date;
 
 @Component
 public class JwtServiceImpl implements jwtService {
-    private final String secretKey = "normally_this_secret_key_will_be_hidden_somewhere_else_but_for_for_now_this_is_okay";
-    private final long experationTimeInSeconds = 30 * 24 * 60 * 60 * 60;
 
     @Override
     public String generateToken(String email) {
+        final long experationTimeInSeconds = 30 * 24 * 60 * 60 * 60;
         return Jwts.builder()
                 .issuer("CompCheck")
                 .issuedAt(new Date())
@@ -30,7 +29,7 @@ public class JwtServiceImpl implements jwtService {
     }
 
     private Key createSecretKey(){
-        byte[] keyBytes = Decoders.BASE64.decode(this.secretKey);
+        byte[] keyBytes = Decoders.BASE64.decode("normally_this_secret_key_will_be_hidden_somewhere_else_but_for_for_now_this_is_okay");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
