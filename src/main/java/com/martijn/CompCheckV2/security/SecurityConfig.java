@@ -17,8 +17,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) {
-        return null;
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests((auth)-> auth
+                .anyRequest().permitAll());
+        return httpSecurity.build();
     }
+
+
 
 }
