@@ -1,5 +1,7 @@
 package com.martijn.CompCheckV2.rest.dto.requests;
 
+import com.martijn.CompCheckV2.presistence.entity.UserRoles;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -17,6 +19,8 @@ public record UserRegisterRequest(
         @Email
         String email,
         @NotBlank
-        String password
+        String password,
+        @Nullable
+        UserRoles role
 ) {
 }

@@ -16,6 +16,7 @@ public class UserMapper {
                 .country(request.country())
                 .email(request.email())
                 .password(request.password())
+                .role(request.role())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class UserMapper {
                 .country(dto.country())
                 .email(dto.email())
                 .password(dto.password())
+                .role(dto.role())
                 .build();
     }
 

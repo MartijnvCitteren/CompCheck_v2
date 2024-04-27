@@ -28,4 +28,5 @@ public class User {
     private String country;
     private String email;
     private String password;
+    private UserRoles role;
 }

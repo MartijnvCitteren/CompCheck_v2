@@ -1,5 +1,6 @@
 package com.martijn.CompCheckV2.rest.dto;
 
+import com.martijn.CompCheckV2.presistence.entity.UserRoles;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
 
@@ -12,6 +13,7 @@ public record UserDto(
         String city,
         String country,
         String email,
-        String password
+        String password,
+        UserRoles role
 ) {
 }
