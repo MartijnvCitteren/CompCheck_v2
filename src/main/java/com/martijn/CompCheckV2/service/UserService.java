@@ -17,7 +17,6 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-
     public UserDto registerUser(UserDto userDto) {
         if (userRepository.existsByEmail(userDto.email())) {
             throw new EmailAlreadyExistsException();

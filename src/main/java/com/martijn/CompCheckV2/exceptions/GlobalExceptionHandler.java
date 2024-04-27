@@ -1,5 +1,7 @@
 package com.martijn.CompCheckV2.exceptions;
 
+import com.martijn.CompCheckV2.exceptions.custom.EmailAlreadyExistsException;
+import com.martijn.CompCheckV2.exceptions.custom.EmailNotFoundException;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +28,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({EntityExistsException.class})
-    public ResponseEntity<Object> handleEntityExistsException(EntityExistsException e) {
+    @ExceptionHandler({EmailAlreadyExistsException.class})
+    public ResponseEntity<Object> handleEmailExistsException(EntityExistsException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler({EmailNotFoundException.class})
+    public ResponseEntity<Object> handleEmailNotFoundException(EntityExistsException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 }
