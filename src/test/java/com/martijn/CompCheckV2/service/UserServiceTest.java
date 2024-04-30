@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -63,4 +65,21 @@ class UserServiceTest {
         assertThrows(EntityExistsException.class, () -> userService.registerUser(registrant));
     }
 
+    @Test
+    void givenEmailExists_whenSearchingUserByMail_thenReturnUser() {
+        //given
+        String email = "test@test.com";
+        User user = UserFactory.createUser().email(email).build();
+        UserDto userDto = UserDtoFactory.createUserDto().email(email).build();
+
+        //when
+        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+        UserDto result = userService.findUserByEmail(email);
+
+        //then
+        assertEquals(userDto.email(), result.email());
+        assertEquals(userDto.firstName(), result.firstName());
+        assertEquals(userDto.password(), result.password());
+        assertEquals(userDto.country(), result.country());
+    }
 }
