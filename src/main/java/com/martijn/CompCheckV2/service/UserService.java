@@ -20,25 +20,27 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public UserDto registerUser(UserDto userDto) {
         if (userRepository.existsByEmail(userDto.email())) {
             throw new EmailAlreadyExistsException();
         }
         User newUser = UserMapper.dtoToUser(userDto);
-        newUser.setPassword(new BCryptPasswordEncoder().encode(userDto.password()));
+        newUser.setPassword(passwordEncoder.encode(userDto.password()));
         newUser = userRepository.save(newUser);
         return UserMapper.userToUserDto(newUser);
     }
 
     public String login(LoginDto loginDto) {
-        UserDto user  = findUserByEmail(loginDto.email());
-        if(user.password().equals(loginDto.password())){
+        UserDto user = findUserByEmail(loginDto.email());
+        if (passwordEncoder.matches(loginDto.password(), user.password())) {
             return jwtService.generateToken(loginDto.email());
         }
         throw new InvalidLoginCredentialsException();
     }
 
-    private UserDto findUserByEmail(String email) {
+    public UserDto findUserByEmail(String email) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         return optionalUser.map(UserMapper::userToUserDto).orElseThrow(InvalidLoginCredentialsException::new);
     }

@@ -47,7 +47,7 @@ public class JwtServiceImpl implements JwtService {
 
 
     private SecretKey creatSecretKey() {
-        String secretKey = "normally_this_secret_key_will_be_hidden_somewhere_else_but_for_for_now_this_is_okay";
+        String secretKey = "normally1this1secret1key1will1be1hidden1somewhere1else1but1for1for1now1this1is1okay";
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }

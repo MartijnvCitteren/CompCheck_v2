@@ -2,7 +2,6 @@ package com.martijn.CompCheckV2.exceptions;
 
 import com.martijn.CompCheckV2.exceptions.custom.EmailAlreadyExistsException;
 import com.martijn.CompCheckV2.exceptions.custom.InvalidLoginCredentialsException;
-import jakarta.persistence.EntityExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -29,12 +28,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({EmailAlreadyExistsException.class})
-    public ResponseEntity<Object> handleEmailExistsException(EntityExistsException e) {
+    public ResponseEntity<Object> handleEmailExistsException(EmailAlreadyExistsException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler({InvalidLoginCredentialsException.class})
-    public ResponseEntity<Object> handleEmailNotFoundException(EntityExistsException e) {
+    public ResponseEntity<Object> handleInvalidLoginCredentialsException(InvalidLoginCredentialsException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 }

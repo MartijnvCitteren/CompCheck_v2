@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest loginRequest){
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest loginRequest) {
         String jwt = userService.login(UserMapper.loginRequestToDto(loginRequest));
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
