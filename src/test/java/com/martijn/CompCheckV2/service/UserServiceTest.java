@@ -4,15 +4,19 @@ import com.martijn.CompCheckV2.exceptions.custom.InvalidLoginCredentialsExceptio
 import com.martijn.CompCheckV2.presistence.entity.User;
 import com.martijn.CompCheckV2.presistence.entity.UserFactory;
 import com.martijn.CompCheckV2.presistence.repository.UserRepository;
+import com.martijn.CompCheckV2.rest.dto.LoginDto;
 import com.martijn.CompCheckV2.rest.dto.UserDto;
 import com.martijn.CompCheckV2.rest.dto.UserDtoFactory;
+import com.martijn.CompCheckV2.security.jwt.JwtService;
 import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.print.DocFlavor;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +29,10 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
+    @Mock
+    private JwtService jwtService;
 
     @InjectMocks
     private UserService userService;
@@ -96,4 +104,39 @@ class UserServiceTest {
         //then
         assertThrows(InvalidLoginCredentialsException.class, () -> userService.findUserByEmail(email));
     }
+
+    @Test
+    void givenLogInCredentialsNOTValid_whenLoggingIn_thenThrowException() {
+        //given
+        LoginDto inValidLogin = LoginDto.builder().email("valid@mail.com").password("invalidPassword").build();
+        User user = UserFactory.createUser().email("valid@mail.com").password("validPassword").build();
+        UserDto userDto = UserDtoFactory.createUserDto().email("valid@mail.com").password("validPassword").build();
+        String jwtResponse = "iAmAJwtToken";
+
+        //when
+        when(userRepository.findByEmail(inValidLogin.email())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(any(String.class), any(String.class))).thenReturn(false);
+
+        //then
+        assertThrows(InvalidLoginCredentialsException.class, ()-> userService.login(inValidLogin));
+    }
+
+    @Test
+    void givenLogInCredentialsAreValid_whenLoggingIn_thenReturnJwtString() {
+        //given
+        LoginDto validLogin = LoginDto.builder().email("valid@mail.com").password("validPassword").build();
+        User user = UserFactory.createUser().email("valid@mail.com").password("validPassword").build();
+        UserDto userDto = UserDtoFactory.createUserDto().email("valid@mail.com").password("validPassword").build();
+        String jwtResponse = "iAmAJwtToken";
+
+        //when
+        when(userRepository.findByEmail(validLogin.email())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(any(String.class), any(String.class))).thenReturn(true);
+        when(jwtService.generateToken(validLogin.email())).thenReturn(jwtResponse);
+
+        //then
+        String result = userService.login(validLogin);
+        assertEquals(jwtResponse, result);
+    }
+
 }
