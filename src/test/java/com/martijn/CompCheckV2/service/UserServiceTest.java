@@ -1,13 +1,12 @@
 package com.martijn.CompCheckV2.service;
 
-import com.martijn.CompCheckV2.exceptions.custom.EmailNotFoundException;
+import com.martijn.CompCheckV2.exceptions.custom.InvalidLoginCredentialsException;
 import com.martijn.CompCheckV2.presistence.entity.User;
 import com.martijn.CompCheckV2.presistence.entity.UserFactory;
 import com.martijn.CompCheckV2.presistence.repository.UserRepository;
 import com.martijn.CompCheckV2.rest.dto.UserDto;
 import com.martijn.CompCheckV2.rest.dto.UserDtoFactory;
 import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -95,6 +94,6 @@ class UserServiceTest {
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
 
         //then
-        assertThrows(EmailNotFoundException.class, () -> userService.findUserByEmail(email));
+        assertThrows(InvalidLoginCredentialsException.class, () -> userService.findUserByEmail(email));
     }
 }
