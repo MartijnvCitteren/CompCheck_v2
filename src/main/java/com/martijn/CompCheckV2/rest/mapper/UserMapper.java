@@ -1,7 +1,9 @@
 package com.martijn.CompCheckV2.rest.mapper;
 
 import com.martijn.CompCheckV2.presistence.entity.User;
+import com.martijn.CompCheckV2.rest.dto.LoginDto;
 import com.martijn.CompCheckV2.rest.dto.UserDto;
+import com.martijn.CompCheckV2.rest.dto.requests.LoginRequest;
 import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
 import com.martijn.CompCheckV2.rest.dto.response.UserRegisterResponse;
 
@@ -51,6 +53,13 @@ public class UserMapper {
                 .country(user.getCountry())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .build();
+    }
+
+    public static LoginDto loginRequestToDto(LoginRequest request) {
+        return LoginDto.builder()
+                .email(request.email())
+                .password(request.password())
                 .build();
     }
 }

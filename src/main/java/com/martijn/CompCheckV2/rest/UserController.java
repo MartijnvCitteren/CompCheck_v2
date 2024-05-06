@@ -1,6 +1,7 @@
 package com.martijn.CompCheckV2.rest;
 
 import com.martijn.CompCheckV2.rest.dto.UserDto;
+import com.martijn.CompCheckV2.rest.dto.requests.LoginRequest;
 import com.martijn.CompCheckV2.rest.dto.requests.UserRegisterRequest;
 import com.martijn.CompCheckV2.rest.dto.response.UserRegisterResponse;
 import com.martijn.CompCheckV2.rest.mapper.UserMapper;
@@ -24,5 +25,11 @@ public class UserController {
     public ResponseEntity<UserRegisterResponse> registerUser(@Valid @RequestBody UserRegisterRequest userRegisterRequest) {
         UserDto newUser = userService.registerUser(UserMapper.requestToDto(userRegisterRequest));
         return new ResponseEntity<>((UserMapper.userDtoToResponse(newUser)), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest loginRequest){
+        String jwt = userService.login(UserMapper.loginRequestToDto(loginRequest));
+        return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 }
